@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  webapp:
+    build:
+      context: https://github.com/KithwoodNYU/AppSecAssignFour
+    ports:
+        - "8080:80"

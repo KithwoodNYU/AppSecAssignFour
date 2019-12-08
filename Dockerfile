@@ -1,6 +1,4 @@
 FROM tiangolo/uwsgi-nginx-flask
-#RUN apt-get update
-#RUN apt-get -y install nginx uwsgi
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
