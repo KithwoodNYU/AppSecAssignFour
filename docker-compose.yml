@@ -1,6 +1,20 @@
 version: "3.7"
 services:
-  kspell:
+  web:
+    image: kithwoodnyu/kspell:1.0
     build: .
     ports:
         - "8080:80"
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 1gb
+          cpus: "1"
+    secrets:
+      - csrf_token
+secrets:
+  csrf_token:
+    external: true

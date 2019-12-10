@@ -11,9 +11,16 @@ from datetime import datetime
 BASE = db_classes.BASE
 DBFILE = "kspell.db"
 
+def get_secret(secret_name):
+    try:
+        with open(f'/run/secrets/{secret_name}', 'r') as secret_file:
+            return secret_file.read()
+    except IOError:
+        return None
+
 def create_app():
     flask_app = Flask(__name__)
-    flask_app.config['SECRET_KEY'] = os.urandom(32)
+    flask_app.config['SECRET_KEY'] = get_secret('csrf_token')
     flask_app.config['SESSION_TYPE'] = 'filesystem'
     #remove SESSION_COOKIE_SECURE to test using in private browsing
     
